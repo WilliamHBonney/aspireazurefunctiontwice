@@ -17,7 +17,8 @@ public class Function1
     [Function("Function1")]
     public IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequest req)
     {
+        var exampleEnvironment = Environment.GetEnvironmentVariable("EXAMPLE_ENV") ?? "Not Set";
         _logger.LogInformation("C# HTTP trigger function processed a request.");
-        return new OkObjectResult("Welcome to Azure Functions!");
+        return new OkObjectResult($"Welcome to Azure Functions! Example environment var: {exampleEnvironment}");
     }
 }

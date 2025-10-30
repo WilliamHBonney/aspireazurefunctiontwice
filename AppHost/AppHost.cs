@@ -12,6 +12,7 @@ internal class Program
                 endpointBuilder.TargetPort = 6074;
                 endpointBuilder.IsProxied = false;
             })
+            .WithEnvironment("EXAMPLE_ENV", "I am the environment var from the first one!")
             .WithEnvironment("WEBSITE_HOSTNAME", "localhost:6074")
             .WithEnvironment("ASPNETCORE_URLS", "http://+:6074");
 
@@ -23,6 +24,7 @@ internal class Program
                 endpointBuilder.TargetPort = 6075;
                 endpointBuilder.IsProxied = false;
             })
+            .WithEnvironment("EXAMPLE_ENV", "I am the environment var from the second one!")
             .WithEnvironment("WEBSITE_HOSTNAME", "localhost:6075")
             .WithEnvironment("ASPNETCORE_URLS", "http://+:6075");
 
