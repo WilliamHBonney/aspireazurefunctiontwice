@@ -13,6 +13,8 @@ internal class Program
                 endpointBuilder.IsProxied = false;
             })
             .WithEnvironment("EXAMPLE_ENV", "I am the environment var from the first one!")
+            .WithEnvironment("ASPNETCORE_CONTENTROOT", GetContentPath("first"))
+            .WithEnvironment("DOTNET_CONTENTROOT", GetContentPath("first"))
             .WithEnvironment("WEBSITE_HOSTNAME", "localhost:6074")
             .WithEnvironment("ASPNETCORE_URLS", "http://+:6074");
 
@@ -25,9 +27,17 @@ internal class Program
                 endpointBuilder.IsProxied = false;
             })
             .WithEnvironment("EXAMPLE_ENV", "I am the environment var from the second one!")
+            .WithEnvironment("ASPNETCORE_CONTENTROOT", GetContentPath("second"))
+            .WithEnvironment("DOTNET_CONTENTROOT", GetContentPath("second"))
             .WithEnvironment("WEBSITE_HOSTNAME", "localhost:6075")
             .WithEnvironment("ASPNETCORE_URLS", "http://+:6075");
 
         builder.Build().Run();
+    }
+
+    private static string GetContentPath(string version)
+    {
+        var filePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(typeof(Program).Assembly.Location)!, $"../../../{version}"));
+        return filePath;
     }
 }
